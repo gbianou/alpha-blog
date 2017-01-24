@@ -17,6 +17,20 @@ class ArticlesController < ApplicationController
         
     end 
     
+    def update 
+    
+        
+        @article = Article.find(params[:id])
+ 
+        if @article.update(article_params) 
+            flash[:notice] = "Your Article has been updated"
+            redirect_to article_path(@article)
+        else
+            render :edit
+        end     
+        
+    end
+    
     def create
         
         @article = Article.new(article_params)
@@ -36,19 +50,14 @@ class ArticlesController < ApplicationController
             
     end 
     
-    def update 
     
+    def destroy
         
         @article = Article.find(params[:id])
- 
-        if @article.update(article_params) 
-            flash[:notice] = "Your Article has been updated"
-            redirect_to article_path(@article)
-        else
-            render :edit
-        end     
-        
-    end
+        @article.destroy
+        flash[:notice] = "Your Article was successfully deleted"
+        redirect_to articles_path
+    end 
     
     private 
     def article_params
