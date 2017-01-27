@@ -21,9 +21,6 @@ class ArticlesController < ApplicationController
     
     def update 
     
-        
-      
- 
         if @article.update(article_params) 
             flash[:notice] = "Your Article has been updated"
             redirect_to article_path(@article)
@@ -64,6 +61,7 @@ class ArticlesController < ApplicationController
     def set_article
         @article = Article.find(params[:id])
     end 
+    
     def article_params
         params.require(:article).permit(:title,:description)
     end 
